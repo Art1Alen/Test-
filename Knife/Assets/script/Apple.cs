@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Apple : MonoBehaviour
+{
+    [SerializeField] private ParticleSystem appleParticle;
+
+    private CircleCollider2D myCollider2D;
+    private SpriteRenderer ap;
+   private void Start()
+    {
+        myCollider2D = GetComponent<CircleCollider2D>();
+        ap = GetComponent<SpriteRenderer>();
+    }
+
+   private void OnTriggerEnter2D(Collider2D other)
+    {
+       if (other.CompareTag("Knife"))
+        {
+            myCollider2D.enabled = false;
+            ap.enabled = false;
+            transform.parent = null;
+            
+
+            appleParticle.Play();
+            Destroy(gameObject,.2f);
+        }
+    }
+   
+}
